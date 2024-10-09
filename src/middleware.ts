@@ -1,11 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const rolePages = {
-  admin: ["/users", "/"],
-  owner: ["/profile", "/"],
-};
-
 export async function middleware(request: NextRequest) {
   const token = await getToken({
     req: request,
@@ -15,20 +10,20 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
   const role = token?.role;
 
-  if (!token && !request.nextUrl.pathname.startsWith("/auth")) {
+  if (!token && !url.pathname.startsWith("/auth")) {
     return NextResponse.redirect(new URL("/auth", request.url));
   }
-  if (token && request.nextUrl.pathname === "/auth") {
+  if (token && url.pathname === "/auth") {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // // role based
-  if (role && rolePages[role]) {
-    const allowedPages = rolePages[role];
+  // role based
+  if (role === "admin" && url.pathname === "/profile") {
+    return NextResponse.redirect(new URL("/access-denied", request.url));
+  }
 
-    if (!allowedPages.some((page) => url.pathname.startsWith(page))) {
-      return NextResponse.redirect(new URL("/access-denied", request.url));
-    }
+  if (role === "owner" && url.pathname === "/users") {
+    return NextResponse.redirect(new URL("/access-denied", request.url));
   }
 
   return NextResponse.next();

@@ -2,19 +2,20 @@
 
 import DataTable from "@/components/data-table/data-table";
 import useArticle from "../hooks/use-articles";
+import ArticleLoadingTable from "./article-loading-table";
 
-const AdminDataTable = () => {
+const AdminArticleTable = () => {
   const { articles, isLoading, handlePageChange, pagination, columns } =
     useArticle();
 
-  if (articles === undefined) {
-    return <p>Loading...</p>;
+  if (isLoading) {
+    return <ArticleLoadingTable />;
   }
 
   return (
     <DataTable
       columns={columns}
-      data={articles?.data}
+      data={articles?.data || []}
       isLoading={isLoading}
       onPageChange={handlePageChange}
       pagination={pagination}
@@ -22,4 +23,4 @@ const AdminDataTable = () => {
   );
 };
 
-export default AdminDataTable;
+export default AdminArticleTable;

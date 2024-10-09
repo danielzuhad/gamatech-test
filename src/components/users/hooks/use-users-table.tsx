@@ -113,8 +113,7 @@ const useUsersTable = () => {
           register,
           handleSubmit,
           formState: { isDirty },
-          watch,
-          getFieldState,
+          // eslint-disable-next-line react-hooks/rules-of-hooks
         } = useForm<UserSchemaType>({
           resolver: zodResolver(userSchema),
           defaultValues: {
@@ -124,7 +123,6 @@ const useUsersTable = () => {
         });
 
         const onSubmit = handleSubmit((data) => {
-          console.log("data ==>", data);
           updateUserMutation.mutate({
             id: user.id,
             firstName: data.first_name,

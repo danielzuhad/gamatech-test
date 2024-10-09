@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
               accessToken: response.data.access,
               refreshToken: response.data.refresh,
               accessTokenExpires: decodedToken.exp,
-              role: "owner",
+              role: userInfo.role,
               name: userInfo.username,
             };
           }
@@ -84,7 +84,6 @@ export const authOptions: NextAuthOptions = {
         refreshToken: token.refreshToken,
         role: token.role,
       };
-      console.log(session);
       return session;
     },
   },

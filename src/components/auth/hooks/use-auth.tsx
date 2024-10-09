@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 const useAuth = () => {
   const router = useRouter();
@@ -34,6 +35,7 @@ const useAuth = () => {
       if (response?.ok) {
         toast.dismiss();
         toast.success("Login Successful");
+        authForm.reset();
         router.push("/");
       }
     },
@@ -43,9 +45,12 @@ const useAuth = () => {
     },
   });
 
-  const handleSubmitForm = async (data: AuthSchemaType) => {
-    await formSubmitMutation.mutateAsync(data);
-  };
+  const handleSubmitForm = useCallback(
+    async (data: AuthSchemaType) => {
+      await formSubmitMutation.mutateAsync(data);
+    },
+    [formSubmitMutation],
+  );
 
   return { authForm, handleSubmitForm };
 };

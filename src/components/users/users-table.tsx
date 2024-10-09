@@ -6,8 +6,6 @@ import useUsersTable from "./hooks/use-users-table";
 const UsersTable = () => {
   const { users, isLoading, columns } = useUsersTable();
 
-  console.log({ users });
-
   return <DataTable data={users} columns={columns} isLoading={isLoading} />;
 };
 

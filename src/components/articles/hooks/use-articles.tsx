@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArticleType } from "../type";
 import { ApiResponseType, PaginationType } from "@/types/api-response";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 const useArticle = () => {
@@ -37,29 +37,44 @@ const useArticle = () => {
     setPagination({ ...pagination, page: newPage });
   };
 
-  const columns: ColumnDef<ArticleType>[] = [
-    {
-      accessorKey: "id",
-      header: "ID",
-      cell({ row }) {
-        return <div className="line-clamp-2 w-[50px]">{row.original.id}</div>;
+  const columns: ColumnDef<ArticleType>[] = useMemo(
+    () => [
+      {
+        accessorKey: "id",
+        header: "ID",
+        cell({ row }) {
+          return (
+            <p className="line-clamp-1 w-[50px] text-xs lg:text-sm">
+              {row.original.id}
+            </p>
+          );
+        },
       },
-    },
-    {
-      accessorKey: "title",
-      header: "Title",
-      cell({ row }) {
-        return <div className="line-clamp-2">{row.original.title}</div>;
+      {
+        accessorKey: "title",
+        header: "Title",
+        cell({ row }) {
+          return (
+            <p className="line-clamp-3 text-xs lg:text-sm">
+              {row.original.title}
+            </p>
+          );
+        },
       },
-    },
-    {
-      accessorKey: "description",
-      header: "Description",
-      cell({ row }) {
-        return <div className="line-clamp-2">{row.original.description}</div>;
+      {
+        accessorKey: "description",
+        header: "Description",
+        cell({ row }) {
+          return (
+            <p className="line-clamp-3 text-xs lg:text-sm">
+              {row.original.description}
+            </p>
+          );
+        },
       },
-    },
-  ];
+    ],
+    [],
+  );
 
   return {
     articles,

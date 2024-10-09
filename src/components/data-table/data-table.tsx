@@ -46,7 +46,7 @@ const DataTable = <TData, TValue>({
 
   return (
     <div className="h-full w-full lg:px-10">
-      <ScrollArea className="h-[70vh] w-full">
+      <ScrollArea className="h-[60vh] w-full lg:h-[70vh]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
