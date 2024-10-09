@@ -52,7 +52,6 @@ const useAuth = () => {
 
   useEffect(() => {
     if (session?.user?.accessToken) {
-      console.log("Setting access token");
       setAuthToken(session.user.accessToken);
     }
   }, [session]);

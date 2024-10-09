@@ -11,7 +11,7 @@ const LayoutPage = ({ children }: LayoutPageProps) => {
   const { status } = useSession();
 
   return (
-    <div className="p container mx-auto flex h-screen items-center justify-center p-5 md:max-w-screen-sm lg:max-w-screen-lg 2xl:max-w-screen-xl">
+    <div className="container mx-auto flex h-screen items-center justify-center p-2 md:max-w-screen-sm lg:max-w-screen-lg lg:p-5 2xl:max-w-screen-xl">
       <div
         className={cn(
           "relative h-full w-full rounded-md border p-2",
