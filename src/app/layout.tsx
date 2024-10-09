@@ -3,9 +3,9 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import LayoutPage from "@/components/layout/layout-page";
 import Navbar from "@/components/navbar/navbar";
-import AuthProvider from "./providers/auth-provider";
-import QueryProvider from "./providers/query-provider";
 import { Toaster } from "react-hot-toast";
+import AuthProvider from "@/providers/auth-provider";
+import QueryProvider from "@/providers/query-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
