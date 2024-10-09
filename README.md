@@ -1,5 +1,8 @@
 ![image](https://github.com/user-attachments/assets/56b8f661-18b4-4429-924d-703d999b831f)
 
+![image](https://github.com/user-attachments/assets/4a74c148-fb0f-462d-9348-c842d2e392f4)
+
+
 # Dependencies
 
 Aplikasi ini menggunakan beberapa dependencies penting untuk mendukung fungsionalitasnya:
