@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
               accessToken: response.data.access,
               refreshToken: response.data.refresh,
               accessTokenExpires: decodedToken.exp,
-              role: userInfo.role,
+              role: "owner",
               name: userInfo.username,
             };
           }
@@ -78,43 +78,17 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.user.role = token.role;
+      session.user = {
+        ...session.user,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
+        role: token.role,
+      };
+      console.log(session);
       return session;
     },
   },
 };
-
-// async function refreshAccessToken(token: JWT) {
-//   try {
-//     const response = await axios.post(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`,
-//       {
-//         refresh: token.refreshToken,
-//       },
-//     );
-
-//     if (!response.data.access) {
-//       throw new Error("RefreshAccessTokenError");
-//     }
-
-//     const decodedToken = jwtDecode(response.data.access) as { exp: number };
-
-//     return {
-//       ...token,
-//       accessToken: response.data.access,
-//       accessTokenExpires: decodedToken.exp,
-//       refreshToken: response.data.refresh ?? token.refreshToken,
-//     };
-//   } catch (error) {
-//     console.log("error refresh token", error);
-//     return {
-//       ...token,
-//       error: "RefreshAccessTokenError",
-//     };
-//   }
-// }
 
 async function getUserInfo(accessToken: string) {
   try {
