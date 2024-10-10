@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
               accessToken: response.data.access,
               refreshToken: response.data.refresh,
               accessTokenExpires: decodedToken.exp,
-              role: userInfo.role,
+              role: "owner",
               name: userInfo.username,
             };
           }
